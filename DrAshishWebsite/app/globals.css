@@ -1,0 +1,148 @@
+/* ============================================================
+   Dr. Ashish Agarwal — global styles
+   Reset, keyframes, and reusable component / hover / responsive
+   classes. Values transcribed from the design reference.
+   Breakpoint: <=960px = "mobile". Fonts: Spectral (serif headings)
+   + Mukta (body + Devanagari) loaded via Google Fonts in layout.
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-mukta), 'Mukta', system-ui, sans-serif;
+  background: #EFF5F4;
+  color: #16201D;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+img { display: block; max-width: 100%; }
+::selection { background: #EC6A4E; color: #ffffff; }
+
+@keyframes omPulse {
+  0%   { box-shadow: 0 14px 30px rgba(236,106,78,.28), 0 0 0 0   rgba(236,106,78,.5); }
+  70%  { box-shadow: 0 14px 30px rgba(236,106,78,.28), 0 0 0 16px rgba(236,106,78,0); }
+  100% { box-shadow: 0 14px 30px rgba(236,106,78,.28), 0 0 0 0   rgba(236,106,78,0); }
+}
+
+/* ---- Layout helpers ---- */
+.container { max-width: 1180px; margin-inline: auto; width: 100%; }
+.wrap { max-width: 1180px; margin-inline: auto; padding: clamp(56px,8vw,96px) 24px; }
+.serif { font-family: var(--font-spectral), 'Spectral', serif; }
+.anchor { scroll-margin-top: 84px; }
+
+/* Section eyebrow label */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 14px; color: #C2553B;
+}
+.eyebrow-dark { color: #F4A88E; }
+.eyebrow-bar { width: 26px; height: 1.5px; background: #EC6A4E; display: inline-block; flex: none; }
+
+/* Standard section H2 */
+.h2 {
+  font-family: 'Spectral', serif; font-weight: 600;
+  font-size: clamp(30px,4.4vw,44px); line-height: 1.1; letter-spacing: -.4px;
+}
+
+/* ---- Buttons / pills ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; text-decoration: none; border: none; cursor: pointer;
+}
+.btn-coral { background: #EC6A4E; color: #ffffff; transition: background .15s; }
+.btn-coral:hover { background: #d85c41; }
+.btn-wa { background: #1FA855; color: #ffffff; transition: background .15s; }
+.btn-wa:hover { background: #18904a; }
+.btn-ghost { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.28); color: #fff; transition: background .15s; }
+.btn-ghost:hover { background: rgba(255,255,255,.16); }
+.btn-teal { background: #0C4A4D; color: #fff; transition: background .15s; }
+.btn-teal:hover { background: #0F6E68; }
+.pulse { animation: omPulse 2.8s infinite; }
+
+/* ---- Links ---- */
+.navlink { color: #DCEAE6; font-size: 15.5px; font-weight: 500; transition: color .15s; }
+.navlink:hover { color: #F4A88E; }
+.iconlink { color: #DCEAE6; display: flex; transition: color .15s; }
+.iconlink:hover { color: #F4A88E; }
+.flink { color: #BFD0CB; transition: color .15s; }
+.flink:hover { color: #ffffff; }
+.tb-call { color: #fff; font-weight: 500; display: flex; align-items: center; gap: 7px; transition: color .15s; }
+.tb-call:hover { color: #F4A88E; }
+.tb-wa { color: #7ee0a3; font-weight: 500; display: flex; align-items: center; gap: 7px; transition: color .15s; }
+.tb-wa:hover { color: #ffffff; }
+.contact-row { transition: opacity .15s; }
+.contact-row:hover { opacity: .85; }
+.menu-link {
+  padding: 14px 4px; color: #DCEAE6; font-size: 17px; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* ---- Cards ---- */
+.card { background: #fff; border: 1px solid #E0EAE7; border-radius: 16px; }
+.card-lift { transition: transform .18s, box-shadow .18s, border-color .18s; }
+.card-lift:hover {
+  border-color: #EC6A4E; transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(12,74,77,.09);
+}
+
+/* ---- Instagram tiles ---- */
+.ig-tile {
+  position: relative; display: block; border-radius: 12px; overflow: hidden;
+  aspect-ratio: 1 / 1; border: 1px solid rgba(236,106,78,.18); transition: border-color .2s;
+}
+.ig-tile:hover { border-color: #EC6A4E; }
+.ig-ovl {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: #fff; opacity: 0; background: rgba(8,58,60,0); transition: all .2s;
+}
+.ig-tile:hover .ig-ovl { opacity: 1; background: rgba(8,58,60,.45); }
+
+/* ---- Map "Directions" chip ---- */
+.dir-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(236,106,78,.18); color: #F4A88E; padding: 10px 16px;
+  border-radius: 999px; font-weight: 600; font-size: 14.5px; transition: background .15s;
+}
+.dir-chip:hover { background: rgba(236,106,78,.3); }
+
+/* ---- FAQ accordion ---- */
+.faq-item { background: #fff; border: 1px solid #E0EAE7; border-radius: 14px; overflow: hidden; }
+.faq-q {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 22px; background: transparent; border: none; text-align: left;
+}
+.faq-indicator {
+  flex: none; width: 26px; height: 26px; border-radius: 50%; background: #E2F0ED; color: #0C4A4D;
+  display: flex; align-items: center; justify-content: center; font-size: 22px; line-height: 1;
+}
+.faq-a { padding: 0 22px 20px; font-size: 15.5px; line-height: 1.65; color: #4E5C57; }
+
+/* ---- Responsive show / hide at the 960px breakpoint ---- */
+.desktop-only { display: block; }
+.nav-desktop { display: flex; align-items: center; gap: 26px; white-space: nowrap; }
+.nav-mobile { display: none; }
+.mobile-menu { display: block; }
+.callbar { display: none; }
+.callbar-spacer { display: none; }
+
+@media (max-width: 960px) {
+  .desktop-only { display: none; }
+  .nav-desktop { display: none; }
+  .nav-mobile { display: flex; }
+  .callbar { display: flex; }
+  .callbar-spacer { display: block; }
+}
+@media (min-width: 961px) {
+  /* The mobile dropdown can never show on desktop, even if left open. */
+  .mobile-menu { display: none; }
+}
+
+/* ---- Accessibility ---- */
+:focus-visible { outline: 2px solid #EC6A4E; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pulse { animation: none; }
+  * { transition: none !important; }
+}

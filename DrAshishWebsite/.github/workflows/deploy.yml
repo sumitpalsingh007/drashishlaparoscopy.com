@@ -1,0 +1,63 @@
+name: Deploy to Hostinger
+
+# Builds the static Next.js export and uploads ./out to Hostinger over FTP.
+# Mirrors the standard "Hello World on Hostinger via GitHub Actions" setup:
+# build in CI, then SamKirkland/FTP-Deploy-Action syncs the built files.
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   FTP_SERVER     - FTP host from Hostinger hPanel → Files → FTP Accounts
+#                    (e.g. ftp.drashishlaparoscopy.com or the server IP)
+#   FTP_USERNAME   - FTP account username
+#   FTP_PASSWORD   - FTP account password
+# Optional:
+#   FTP_REMOTE_DIR - target web-root directory. Defaults to ./public_html/.
+#                    For an addon/secondary domain it is usually
+#                    ./domains/drashishlaparoscopy.com/public_html/
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site (Next.js export → ./out)
+        run: npm run build
+
+      - name: Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./out/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR || './public_html/' }}
+          # Don't let CI/source files leak into the web root.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
