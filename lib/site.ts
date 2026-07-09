@@ -22,7 +22,9 @@ export const FACEBOOK_LABEL = 'Dr. Ashish Agarwal';
 
 export const ADDRESS_LINE = 'Daudpur, Near Bela Public School, Gorakhpur, Uttar Pradesh';
 export const ADDRESS_SHORT = 'Daudpur, Near Bela Public School, Gorakhpur, UP';
-export const OPD_TIMING = 'Mon–Sat: 10:00 AM – 8:00 PM';
+export const OPD_TIMING = '11:00 AM – 2:00 PM';
+export const OPD_LOCATION = 'Pulse Hospital, Chhatrasal Chowk';
+export const ON_CALL = 'On-call service round the clock';
 
 export const MAPS_EMBED =
   'https://maps.google.com/maps?q=Bela%20Public%20School%20Daudpur%20Gorakhpur&z=14&output=embed';

@@ -120,8 +120,8 @@ const jsonLd = {
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '10:00',
-      closes: '20:00',
+      opens: '11:00',
+      closes: '14:00',
     },
   ],
   alumniOf: [
