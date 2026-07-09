@@ -79,3 +79,21 @@ jobs:
             mirror -R --verbose --exclude-glob .git* ./out/ "$FTP_REMOTE_DIR"
             bye
             LFTP
+
+      # Cache-bust after deploy so changes are visible immediately.
+      # HTML is already sent `no-cache` by public/.htaccess (LiteSpeed + browsers).
+      # This step additionally purges Cloudflare — it only runs if you put your
+      # site behind Cloudflare and add CF_ZONE_ID + CF_API_TOKEN repo secrets;
+      # otherwise it is skipped harmlessly.
+      - name: Purge Cloudflare cache (if configured)
+        if: ${{ secrets.CF_API_TOKEN != '' && secrets.CF_ZONE_ID != '' }}
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          echo "Purging Cloudflare cache for zone $CF_ZONE_ID…"
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
+          echo ""
