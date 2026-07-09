@@ -24,7 +24,8 @@ permissions:
 
 concurrency:
   group: deploy-${{ github.ref }}
-  cancel-in-progress: true
+  # Don't kill an in-progress upload mid-transfer (that leaves the site un-updated).
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -45,20 +46,36 @@ jobs:
       - name: Build static site (Next.js export → ./out)
         run: npm run build
 
-      - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y lftp
+
+      # lftp mirror uploads in parallel and is far more resilient to Hostinger's
+      # FTP timeouts than single-connection actions. Wrapped in a retry so a
+      # transient drop just re-runs instead of failing the whole deploy.
+      - name: Deploy ./out to Hostinger via FTP (parallel + retries)
+        uses: nick-fields/retry@v3
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          # Web root. Defaults to public_html; set FTP_REMOTE_DIR if yours differs
+          # (e.g. an addon domain, or if your FTP account already lands in public_html → set it to ".").
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR != '' && secrets.FTP_REMOTE_DIR || 'public_html' }}
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          timeout: 60000
-          local-dir: ./out/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR != '' && secrets.FTP_REMOTE_DIR || './public_html/' }}
-          # Don't let CI/source files leak into the web root.
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 20
+          command: |
+            lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" <<LFTP
+            set cmd:fail-exit yes
+            set ftp:ssl-allow true
+            set ftp:ssl-force true
+            set ftp:ssl-protect-data true
+            set ssl:verify-certificate no
+            set net:timeout 15
+            set net:max-retries 3
+            set net:reconnect-interval-base 5
+            set mirror:parallel-transfer-count 3
+            mirror -R --verbose --exclude-glob .git* ./out/ "$FTP_REMOTE_DIR"
+            bye
+            LFTP
