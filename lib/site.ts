@@ -17,6 +17,8 @@ export const TEL_ALT = `tel:${PHONE_ALT}`;
 export const WHATSAPP_URL = 'https://wa.me/919807560443';
 export const INSTAGRAM_URL = 'https://www.instagram.com/dr_ashish_agarwal_';
 export const INSTAGRAM_HANDLE = '@dr_ashish_agarwal_';
+export const FACEBOOK_URL = 'https://www.facebook.com/share/18RpZt1at8/';
+export const FACEBOOK_LABEL = 'Dr. Ashish Agarwal';
 
 export const ADDRESS_LINE = 'Daudpur, Near Bela Public School, Gorakhpur, Uttar Pradesh';
 export const ADDRESS_SHORT = 'Daudpur, Near Bela Public School, Gorakhpur, UP';
@@ -26,6 +28,18 @@ export const MAPS_EMBED =
   'https://maps.google.com/maps?q=Bela%20Public%20School%20Daudpur%20Gorakhpur&z=14&output=embed';
 export const MAPS_DIRECTIONS =
   'https://www.google.com/maps/dir/?api=1&destination=Bela+Public+School+Daudpur+Gorakhpur';
+
+// --- Pulse Hospital: additional location where Dr. Ashish operates ---
+export const PULSE_NAME = 'Pulse Hospital';
+export const PULSE_ADDRESS = 'Chatra Sangh Chauraha (Chhatrasal Chowk), 34 Kasya Road, Gorakhpur, Uttar Pradesh 273001';
+export const PULSE_ADDRESS_SHORT = 'Chhatrasal Chowk, Kasya Road, Gorakhpur';
+export const PULSE_MAPS_EMBED =
+  'https://maps.google.com/maps?q=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur&z=16&output=embed';
+export const PULSE_MAPS_DIRECTIONS =
+  'https://www.google.com/maps/dir/?api=1&destination=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur';
+// Opens the Google listing where patients can read & leave reviews.
+export const PULSE_REVIEWS_URL =
+  'https://www.google.com/maps/search/?api=1&query=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur';
 
 // --- Content data ---
 export const conditions = [

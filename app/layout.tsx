@@ -3,7 +3,7 @@ import { Spectral, Mukta } from 'next/font/google';
 import './globals.css';
 import {
   SITE_URL, DOCTOR_NAME, ADDRESS_LINE, PHONE_MAIN_DISPLAY, PHONE_MAIN, PHONE_ALT,
-  INSTAGRAM_URL, OPD_TIMING, conditions,
+  INSTAGRAM_URL, FACEBOOK_URL, OPD_TIMING, conditions,
 } from '@/lib/site';
 
 // Self-hosted Google Fonts (no render-blocking external request).
@@ -100,7 +100,7 @@ const jsonLd = {
   currenciesAccepted: 'INR',
   areaServed: ['Gorakhpur', 'Deoria', 'Kushinagar', 'Maharajganj', 'Purvanchal', 'Uttar Pradesh'],
   knowsLanguage: ['en', 'hi'],
-  sameAs: [INSTAGRAM_URL],
+  sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Daudpur, Near Bela Public School',

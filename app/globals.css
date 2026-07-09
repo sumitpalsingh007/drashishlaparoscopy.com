@@ -119,6 +119,24 @@ img { display: block; max-width: 100%; }
 }
 .faq-a { padding: 0 22px 20px; font-size: 15.5px; line-height: 1.65; color: #4E5C57; }
 
+/* ---- Instagram carousel ---- */
+.insta-track { scrollbar-width: none; -ms-overflow-style: none; scroll-padding: 0 12px; }
+.insta-track::-webkit-scrollbar { display: none; }
+.carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; border: none;
+  background: rgba(236,106,78,.92); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35); z-index: 2; transition: background .15s;
+}
+.carousel-btn:hover { background: #EC6A4E; }
+
+/* ---- Facebook follow card ---- */
+.fb-card { transition: transform .18s, box-shadow .18s, border-color .18s; }
+.fb-card:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,.25); border-color: rgba(24,119,242,.55); }
+.btn-fb { background: #1877F2; color: #fff; transition: background .15s; }
+.btn-fb:hover { background: #0f66d0; }
+
 /* ---- Responsive show / hide at the 960px breakpoint ---- */
 .desktop-only { display: block; }
 .nav-desktop { display: flex; align-items: center; gap: 26px; white-space: nowrap; }

@@ -1,13 +1,15 @@
 import Header from './components/Header';
 import Faq from './components/Faq';
 import Photo from './components/Photo';
+import InstaCarousel from './components/InstaCarousel';
 import {
-  IconPhone, IconWhatsApp, IconCheck, IconInstagram, IconPlus, IconArrowRight,
+  IconPhone, IconWhatsApp, IconCheck, IconInstagram, IconFacebook, IconPlus, IconArrowRight,
   IconMapPin, IconClock, IconStar, LogoBadge,
 } from './components/icons';
 import {
-  TEL_MAIN, TEL_ALT, WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE,
+  TEL_MAIN, TEL_ALT, WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE, FACEBOOK_URL, FACEBOOK_LABEL,
   ADDRESS_LINE, MAPS_EMBED, MAPS_DIRECTIONS,
+  PULSE_NAME, PULSE_ADDRESS_SHORT, PULSE_MAPS_EMBED, PULSE_MAPS_DIRECTIONS, PULSE_REVIEWS_URL,
   conditions, benefits, processSteps, trustCards, testimonials, igTiles,
   SHOW_AYUSHMAN_BAND, SHOW_REVIEWS,
 } from '@/lib/site';
@@ -286,29 +288,50 @@ export default function Home() {
         </section>
       )}
 
-      {/* ============ INSTAGRAM ============ */}
+      {/* ============ SOCIAL: Instagram carousel + Facebook ============ */}
       <section id="instagram" className="anchor" style={{ background: '#0C4A4D', color: '#fff' }}>
         <div className="wrap">
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 36 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32 }}>
             <div>
-              <div className="eyebrow eyebrow-dark"><span className="eyebrow-bar" />On Instagram</div>
+              <div className="eyebrow eyebrow-dark"><span className="eyebrow-bar" />Follow Dr. Ashish</div>
               <h2 className="serif" style={{ fontWeight: 600, fontSize: 'clamp(28px,4.2vw,42px)', lineHeight: 1.1, letterSpacing: '-.4px' }}>Real surgeries, real updates</h2>
               <p style={{ fontSize: 16, lineHeight: 1.6, color: '#CFE3DE', maxWidth: 520, marginTop: 12 }}>
-                Follow Dr. Ashish for live glimpses of keyhole surgery, patient recoveries and health tips from the clinic.
+                Follow along for live glimpses of keyhole surgery, patient recoveries and health tips from the clinic — on Instagram and Facebook.
               </p>
             </div>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn btn-coral" style={{ gap: 10, padding: '14px 24px', fontWeight: 700, fontSize: 16, whiteSpace: 'nowrap' }}>
-              <IconInstagram size={20} /> Follow {INSTAGRAM_HANDLE}
-            </a>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 12 }}>
-            {igTiles.map((tile, i) => (
-              <a key={i} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="ig-tile" aria-label={`${tile.alt} — open Instagram`}>
-                <Photo name={tile.src} alt={tile.alt} imgStyle={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <span className="ig-ovl"><IconInstagram size={20} /></span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn btn-coral" style={{ gap: 10, padding: '13px 22px', fontWeight: 700, fontSize: '15.5px', whiteSpace: 'nowrap' }}>
+                <IconInstagram size={20} /> Instagram
               </a>
-            ))}
+              <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="btn btn-fb" style={{ gap: 10, padding: '13px 22px', fontWeight: 700, fontSize: '15.5px', whiteSpace: 'nowrap' }}>
+                <IconFacebook size={19} /> Facebook
+              </a>
+            </div>
           </div>
+
+          {/* Instagram carousel (swipeable, autoplaying) */}
+          <InstaCarousel tiles={igTiles} />
+
+          {/* Facebook follow card */}
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fb-card"
+            style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 22, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 16, padding: '18px 20px', flexWrap: 'wrap' }}
+          >
+            <span style={{ flex: 'none', width: 52, height: 52, borderRadius: 14, background: '#1877F2', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <IconFacebook size={28} />
+            </span>
+            <span style={{ flex: '1 1 260px', minWidth: 220 }}>
+              <span style={{ display: 'block', fontSize: 12, letterSpacing: '1.5px', textTransform: 'uppercase', color: '#9FC4BC', fontWeight: 700 }}>On Facebook</span>
+              <span className="serif" style={{ display: 'block', fontSize: 20, fontWeight: 600, color: '#fff', marginTop: 2 }}>{FACEBOOK_LABEL}</span>
+              <span style={{ display: 'block', fontSize: '14.5px', color: '#CFE3DE', marginTop: 3 }}>Clinic updates, patient stories &amp; health tips.</span>
+            </span>
+            <span className="btn btn-fb" style={{ gap: 8, padding: '12px 20px', fontWeight: 700, fontSize: 15, whiteSpace: 'nowrap' }}>
+              Follow on Facebook <IconArrowRight size={15} strokeWidth={2.2} />
+            </span>
+          </a>
         </div>
       </section>
 
@@ -345,9 +368,13 @@ export default function Home() {
                 <span style={{ flex: 'none', width: 42, height: 42, borderRadius: 11, background: 'rgba(236,106,78,.16)', color: '#F4A88E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IconMapPin size={19} strokeWidth={2} /></span>
                 <span><span style={{ display: 'block', fontSize: '12.5px', color: '#9FC4BC', textTransform: 'uppercase', letterSpacing: '1px' }}>Clinic Address</span><span style={{ fontSize: 17, fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{ADDRESS_LINE}</span></span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '15px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,.1)' }}>
                 <span style={{ flex: 'none', width: 42, height: 42, borderRadius: 11, background: 'rgba(236,106,78,.16)', color: '#F4A88E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IconClock size={19} strokeWidth={2} /></span>
                 <span><span style={{ display: 'block', fontSize: '12.5px', color: '#9FC4BC', textTransform: 'uppercase', letterSpacing: '1px' }}>OPD Timing</span><span style={{ fontSize: 17, fontWeight: 500, color: '#fff' }}>Mon–Sat: 10:00 AM – 8:00 PM <span style={{ color: '#9FC4BC', fontSize: 14 }}>(call to confirm)</span></span></span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '15px 0' }}>
+                <span style={{ flex: 'none', width: 42, height: 42, borderRadius: 11, background: 'rgba(236,106,78,.16)', color: '#F4A88E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IconMapPin size={19} strokeWidth={2} /></span>
+                <span><span style={{ display: 'block', fontSize: '12.5px', color: '#9FC4BC', textTransform: 'uppercase', letterSpacing: '1px' }}>Surgeries at</span><span style={{ fontSize: 17, fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{PULSE_NAME} — {PULSE_ADDRESS_SHORT}</span></span>
               </div>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 24 }}>
@@ -365,6 +392,21 @@ export default function Home() {
                 </div>
                 <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="dir-chip">Directions <IconArrowRight size={15} strokeWidth={2.2} /></a>
               </div>
+            </div>
+            {/* Pulse Hospital — additional operating location */}
+            <div style={{ borderRadius: 18, overflow: 'hidden', border: '1px solid rgba(236,106,78,.25)', boxShadow: '0 24px 50px rgba(0,0,0,.3)', background: '#062E30', marginTop: 16 }}>
+              <iframe title="Pulse Hospital location map" src={PULSE_MAPS_EMBED} style={{ width: '100%', height: 300, border: 0, display: 'block' }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '16px 18px' }}>
+                <div>
+                  <div style={{ fontSize: 12, color: '#F4A88E', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: 3 }}>Surgeries at</div>
+                  <div className="serif" style={{ fontWeight: 600, fontSize: 17, color: '#fff' }}>{PULSE_NAME}</div>
+                  <div style={{ fontSize: '13.5px', color: '#9FC4BC' }}>{PULSE_ADDRESS_SHORT}</div>
+                </div>
+                <a href={PULSE_MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="dir-chip">Directions <IconArrowRight size={15} strokeWidth={2.2} /></a>
+              </div>
+              <a href={PULSE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '13px', borderTop: '1px solid rgba(255,255,255,.08)', color: '#F4A88E', fontWeight: 600, fontSize: '14.5px' }}>
+                <IconStar size={16} stroke="#F4A88E" strokeWidth={2} /> Read &amp; leave reviews on Google
+              </a>
             </div>
           </div>
         </div>
@@ -400,6 +442,7 @@ export default function Home() {
                 <a href={TEL_ALT} className="flink">+91 79850 32860</a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flink">WhatsApp Chat</a>
                 <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="flink">Instagram {INSTAGRAM_HANDLE}</a>
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="flink">Facebook</a>
                 <span style={{ color: '#85A39C', lineHeight: 1.5 }}>Daudpur, Near Bela Public<br />School, Gorakhpur, UP</span>
               </div>
             </div>
