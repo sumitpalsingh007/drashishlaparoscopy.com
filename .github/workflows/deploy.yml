@@ -30,6 +30,9 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -58,9 +61,7 @@ jobs:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          # Web root. Defaults to public_html; set FTP_REMOTE_DIR if yours differs
-          # (e.g. an addon domain, or if your FTP account already lands in public_html → set it to ".").
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR != '' && secrets.FTP_REMOTE_DIR || 'public_html' }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR != '' && secrets.FTP_REMOTE_DIR || '.' }}
         with:
           timeout_minutes: 10
           max_attempts: 3
@@ -71,12 +72,12 @@ jobs:
             set ftp:ssl-allow true
             set ftp:ssl-force true
             set ftp:ssl-protect-data true
-            set ssl:verify-certificate no
+            set ssl:verify-certificate yes
             set net:timeout 15
             set net:max-retries 3
             set net:reconnect-interval-base 5
             set mirror:parallel-transfer-count 3
-            mirror -R --verbose --exclude-glob .git* ./out/ "$FTP_REMOTE_DIR"
+            mirror -R --delete --verbose --exclude-glob .git* ./out/ "$FTP_REMOTE_DIR"
             bye
             LFTP
 
@@ -86,10 +87,7 @@ jobs:
       # site behind Cloudflare and add CF_ZONE_ID + CF_API_TOKEN repo secrets;
       # otherwise it is skipped harmlessly.
       - name: Purge Cloudflare cache (if configured)
-        if: ${{ secrets.CF_API_TOKEN != '' && secrets.CF_ZONE_ID != '' }}
-        env:
-          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        if: ${{ env.CF_API_TOKEN != '' && env.CF_ZONE_ID != '' }}
         run: |
           echo "Purging Cloudflare cache for zone $CF_ZONE_ID…"
           curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
