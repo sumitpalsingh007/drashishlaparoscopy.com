@@ -10,6 +10,7 @@ import {
   TEL_MAIN, TEL_ALT, WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE, FACEBOOK_URL, FACEBOOK_LABEL,
   ADDRESS_LINE, MAPS_EMBED, MAPS_DIRECTIONS,
   PULSE_NAME, PULSE_ADDRESS_SHORT, PULSE_MAPS_EMBED, PULSE_MAPS_DIRECTIONS, PULSE_REVIEWS_URL,
+  ASTRO_NAME, ASTRO_OPD_TIMING,
   conditions, benefits, processSteps, trustCards, testimonials, igTiles,
   SHOW_AYUSHMAN_BAND, SHOW_REVIEWS,
 } from '@/lib/site';
@@ -370,7 +371,7 @@ export default function Home() {
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,.1)' }}>
                 <span style={{ flex: 'none', width: 42, height: 42, borderRadius: 11, background: 'rgba(236,106,78,.16)', color: '#F4A88E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IconClock size={19} strokeWidth={2} /></span>
-                <span><span style={{ display: 'block', fontSize: '12.5px', color: '#9FC4BC', textTransform: 'uppercase', letterSpacing: '1px' }}>OPD Timing</span><span style={{ fontSize: 17, fontWeight: 500, color: '#fff' }}>11:00 AM – 2:00 PM · Pulse Hospital <span style={{ color: '#9FC4BC', fontSize: 14, display: 'block', marginTop: 2 }}>On-call service round the clock</span></span></span>
+                <span><span style={{ display: 'block', fontSize: '12.5px', color: '#9FC4BC', textTransform: 'uppercase', letterSpacing: '1px' }}>OPD Timing</span><span style={{ fontSize: 17, fontWeight: 500, color: '#fff' }}>11:00 AM – 2:00 PM · {PULSE_NAME}<span style={{ display: 'block', marginTop: 2 }}>{ASTRO_OPD_TIMING} · {ASTRO_NAME}</span><span style={{ color: '#9FC4BC', fontSize: 14, display: 'block', marginTop: 2 }}>On-call service round the clock</span></span></span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '15px 0' }}>
                 <span style={{ flex: 'none', width: 42, height: 42, borderRadius: 11, background: 'rgba(236,106,78,.16)', color: '#F4A88E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IconMapPin size={19} strokeWidth={2} /></span>

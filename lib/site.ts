@@ -23,7 +23,7 @@ export const FACEBOOK_LABEL = 'Dr. Ashish Agarwal';
 export const ADDRESS_LINE = 'Daudpur, Near Bela Public School, Gorakhpur, Uttar Pradesh';
 export const ADDRESS_SHORT = 'Daudpur, Near Bela Public School, Gorakhpur, UP';
 export const OPD_TIMING = '11:00 AM – 2:00 PM';
-export const OPD_LOCATION = 'Pulse Hospital, Chhatrasal Chowk';
+export const OPD_LOCATION = 'Pulse Hospital, Chhatrasang Chauraha';
 export const ON_CALL = 'On-call service round the clock';
 
 export const MAPS_EMBED =
@@ -33,15 +33,20 @@ export const MAPS_DIRECTIONS =
 
 // --- Pulse Hospital: additional location where Dr. Ashish operates ---
 export const PULSE_NAME = 'Pulse Hospital';
-export const PULSE_ADDRESS = 'Chatra Sangh Chauraha (Chhatrasal Chowk), 34 Kasya Road, Gorakhpur, Uttar Pradesh 273001';
-export const PULSE_ADDRESS_SHORT = 'Chhatrasal Chowk, Kasya Road, Gorakhpur';
+export const PULSE_ADDRESS = 'Chhatrasang Chauraha, 34 Kasya Road, Gorakhpur, Uttar Pradesh 273001';
+export const PULSE_ADDRESS_SHORT = 'Chhatrasang Chauraha, Kasya Road, Gorakhpur';
 export const PULSE_MAPS_EMBED =
-  'https://maps.google.com/maps?q=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur&z=16&output=embed';
+  'https://maps.google.com/maps?q=Pulse%20Hospital%20Chhatrasang%20Chauraha%20Kasya%20Road%20Gorakhpur&z=16&output=embed';
 export const PULSE_MAPS_DIRECTIONS =
-  'https://www.google.com/maps/dir/?api=1&destination=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur';
+  'https://www.google.com/maps/dir/?api=1&destination=Pulse%20Hospital%20Chhatrasang%20Chauraha%20Kasya%20Road%20Gorakhpur';
 // Opens the Google listing where patients can read & leave reviews.
 export const PULSE_REVIEWS_URL =
-  'https://www.google.com/maps/search/?api=1&query=Pulse%20Hospital%20Chatra%20Sangh%20Chauraha%20Kasya%20Road%20Gorakhpur';
+  'https://www.google.com/maps/search/?api=1&query=Pulse%20Hospital%20Chhatrasang%20Chauraha%20Kasya%20Road%20Gorakhpur';
+
+// --- Astro Medics Super Speciality Hospital: third OPD location ---
+// Name + OPD timing confirmed; add ASTRO_ADDRESS / maps links once available.
+export const ASTRO_NAME = 'Astro Medics Super Speciality Hospital';
+export const ASTRO_OPD_TIMING = '2:00 PM – 4:00 PM';
 
 // --- Content data ---
 export const conditions = [
