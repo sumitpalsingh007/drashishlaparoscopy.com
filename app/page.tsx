@@ -32,12 +32,15 @@ export default function Home() {
         <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(40px,6vw,72px) 24px clamp(48px,6vw,80px)', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'clamp(28px,4vw,56px)' }}>
           <div style={{ flex: '1 1 430px', minWidth: 300 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, border: '1px solid rgba(236,106,78,.45)', color: '#F4A88E', borderRadius: 999, padding: '7px 15px', fontSize: 12, letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: 600, marginBottom: 22 }}>
-              Advanced Laparoscopic Surgeon · Gorakhpur
+              MBBS · MS · FMAS · Ayushman Empanelled
             </div>
             <h1 className="serif" style={{ fontWeight: 600, fontSize: 'clamp(40px,6.3vw,66px)', lineHeight: 1.04, letterSpacing: '-.6px' }}>
-              Painless keyhole surgery,<br /><span style={{ color: '#F4A88E' }}>closer to home.</span>
+              Laparoscopic Surgeon<br /><span style={{ color: '#F4A88E' }}>in Gorakhpur</span>
             </h1>
-            <p style={{ fontSize: 'clamp(16.5px,1.9vw,19px)', lineHeight: 1.6, color: '#CFE3DE', maxWidth: 545, margin: '20px 0 8px' }}>
+            <p className="serif" style={{ fontWeight: 500, fontSize: 'clamp(20px,2.7vw,27px)', lineHeight: 1.28, color: '#EAF3F1', margin: '16px 0 0' }}>
+              Painless keyhole surgery, closer to home.
+            </p>
+            <p style={{ fontSize: 'clamp(16.5px,1.9vw,19px)', lineHeight: 1.6, color: '#CFE3DE', maxWidth: 545, margin: '14px 0 8px' }}>
               Gallstones, hernia, piles, fistula, appendix &amp; more — treated through tiny cuts with modern laparoscopic technique. Less pain, faster recovery.
             </p>
             <p style={{ fontSize: 'clamp(16px,2vw,18.5px)', color: '#9FC4BC', marginBottom: 28 }}>

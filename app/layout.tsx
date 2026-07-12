@@ -3,7 +3,7 @@ import { Spectral, Mukta } from 'next/font/google';
 import './globals.css';
 import {
   SITE_URL, DOCTOR_NAME, ADDRESS_LINE, PHONE_MAIN_DISPLAY, PHONE_MAIN, PHONE_ALT,
-  INSTAGRAM_URL, FACEBOOK_URL, OPD_TIMING, conditions,
+  INSTAGRAM_URL, FACEBOOK_URL, OPD_TIMING, conditions, faqs,
 } from '@/lib/site';
 
 // Self-hosted Google Fonts (no render-blocking external request).
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      'Dr. Ashish Agarwal — Laparoscopic Surgeon in Gorakhpur | Piles, Hernia & Gallstone Surgery',
+      'Laparoscopic Surgeon in Gorakhpur | Piles, Hernia & Gallstone Surgery — Dr. Ashish Agarwal',
     template: '%s | Dr. Ashish Agarwal',
   },
   description:
@@ -118,10 +118,11 @@ const jsonLd = {
   },
   openingHoursSpecification: [
     {
+      // OPD across locations: 11 AM–2 PM (Pulse) + 2 PM–4 PM (Astro Medics).
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       opens: '11:00',
-      closes: '14:00',
+      closes: '16:00',
     },
   ],
   alumniOf: [
@@ -141,6 +142,19 @@ const jsonLd = {
   })),
 };
 
+// FAQ structured data — primarily for AI answer engines / GEO citation
+// (Google retired FAQ rich results in 2026; this aids LLM comprehension).
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${SITE_URL}/#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spectral.variable} ${mukta.variable}`}>
@@ -150,6 +164,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
       </body>
     </html>
