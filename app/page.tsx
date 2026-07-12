@@ -10,7 +10,7 @@ import {
   TEL_MAIN, TEL_ALT, WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE, FACEBOOK_URL, FACEBOOK_LABEL,
   ADDRESS_LINE, MAPS_EMBED, MAPS_DIRECTIONS,
   PULSE_NAME, PULSE_ADDRESS_SHORT, PULSE_MAPS_EMBED, PULSE_MAPS_DIRECTIONS, PULSE_REVIEWS_URL,
-  ASTRO_NAME, ASTRO_OPD_TIMING,
+  ASTRO_NAME, ASTRO_OPD_TIMING, ASTRO_ADDRESS_SHORT, ASTRO_MAPS_EMBED, ASTRO_MAPS_DIRECTIONS, ASTRO_REVIEWS_URL,
   conditions, benefits, processSteps, trustCards, testimonials, igTiles,
   SHOW_AYUSHMAN_BAND, SHOW_REVIEWS,
 } from '@/lib/site';
@@ -406,6 +406,21 @@ export default function Home() {
                 <a href={PULSE_MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="dir-chip">Directions <IconArrowRight size={15} strokeWidth={2.2} /></a>
               </div>
               <a href={PULSE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '13px', borderTop: '1px solid rgba(255,255,255,.08)', color: '#F4A88E', fontWeight: 600, fontSize: '14.5px' }}>
+                <IconStar size={16} stroke="#F4A88E" strokeWidth={2} /> Read &amp; leave reviews on Google
+              </a>
+            </div>
+            {/* Astro Medics — third OPD location */}
+            <div style={{ borderRadius: 18, overflow: 'hidden', border: '1px solid rgba(236,106,78,.25)', boxShadow: '0 24px 50px rgba(0,0,0,.3)', background: '#062E30', marginTop: 16 }}>
+              <iframe title="Astro Medics Super Speciality Hospital location map" src={ASTRO_MAPS_EMBED} style={{ width: '100%', height: 300, border: 0, display: 'block' }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '16px 18px' }}>
+                <div>
+                  <div style={{ fontSize: 12, color: '#F4A88E', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: 3 }}>OPD · {ASTRO_OPD_TIMING}</div>
+                  <div className="serif" style={{ fontWeight: 600, fontSize: 17, color: '#fff' }}>{ASTRO_NAME}</div>
+                  <div style={{ fontSize: '13.5px', color: '#9FC4BC' }}>{ASTRO_ADDRESS_SHORT}</div>
+                </div>
+                <a href={ASTRO_MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="dir-chip">Directions <IconArrowRight size={15} strokeWidth={2.2} /></a>
+              </div>
+              <a href={ASTRO_REVIEWS_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '13px', borderTop: '1px solid rgba(255,255,255,.08)', color: '#F4A88E', fontWeight: 600, fontSize: '14.5px' }}>
                 <IconStar size={16} stroke="#F4A88E" strokeWidth={2} /> Read &amp; leave reviews on Google
               </a>
             </div>

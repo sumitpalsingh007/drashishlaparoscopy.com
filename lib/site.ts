@@ -44,9 +44,18 @@ export const PULSE_REVIEWS_URL =
   'https://www.google.com/maps/search/?api=1&query=Pulse%20Hospital%20Chhatrasang%20Chauraha%20Kasya%20Road%20Gorakhpur';
 
 // --- Astro Medics Super Speciality Hospital: third OPD location ---
-// Name + OPD timing confirmed; add ASTRO_ADDRESS / maps links once available.
+// Registered on Google Maps as "Astromedics Super Speciality Hospital"
+// (@26.7372797,83.3689245); the map queries use that spelling so they resolve.
 export const ASTRO_NAME = 'Astro Medics Super Speciality Hospital';
 export const ASTRO_OPD_TIMING = '2:00 PM – 4:00 PM';
+export const ASTRO_ADDRESS_SHORT = 'H.P. Dubey Road, Betiahata, Gorakhpur';
+export const ASTRO_MAPS_EMBED =
+  'https://maps.google.com/maps?q=Astromedics%20Super%20Speciality%20Hospital%20Gorakhpur&z=16&output=embed';
+export const ASTRO_MAPS_DIRECTIONS =
+  'https://www.google.com/maps/dir/?api=1&destination=Astromedics%20Super%20Speciality%20Hospital%20Gorakhpur';
+// Opens the Google listing where patients can read & leave reviews.
+export const ASTRO_REVIEWS_URL =
+  'https://www.google.com/maps/search/?api=1&query=Astromedics%20Super%20Speciality%20Hospital%20Gorakhpur';
 
 // --- Content data ---
 export const conditions = [
