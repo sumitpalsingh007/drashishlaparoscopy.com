@@ -2,22 +2,22 @@ import Header from './components/Header';
 import Faq from './components/Faq';
 import Photo from './components/Photo';
 import InstaCarousel from './components/InstaCarousel';
+import Footer from './components/Footer';
 import {
   IconPhone, IconWhatsApp, IconCheck, IconInstagram, IconFacebook, IconPlus, IconArrowRight,
-  IconMapPin, IconClock, IconStar, LogoBadge,
+  IconMapPin, IconClock, IconStar,
 } from './components/icons';
 import {
-  TEL_MAIN, TEL_ALT, WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE, FACEBOOK_URL, FACEBOOK_LABEL,
+  TEL_MAIN, WHATSAPP_URL, INSTAGRAM_URL, FACEBOOK_URL, FACEBOOK_LABEL,
   ADDRESS_LINE, MAPS_EMBED, MAPS_DIRECTIONS,
   PULSE_NAME, PULSE_ADDRESS_SHORT, PULSE_MAPS_EMBED, PULSE_MAPS_DIRECTIONS, PULSE_REVIEWS_URL,
   ASTRO_NAME, ASTRO_OPD_TIMING, ASTRO_ADDRESS_SHORT, ASTRO_MAPS_EMBED, ASTRO_MAPS_DIRECTIONS, ASTRO_REVIEWS_URL,
   conditions, benefits, processSteps, trustCards, testimonials, igTiles,
   SHOW_AYUSHMAN_BAND, SHOW_REVIEWS,
 } from '@/lib/site';
+import { conditionSlugByEn } from '@/lib/services';
 
 export default function Home() {
-  const year = new Date().getFullYear();
-
   return (
     <div id="top">
       <Header />
@@ -138,16 +138,33 @@ export default function Home() {
             Find your problem below — every condition can be treated with safe, modern surgery. Not sure? Just call and ask.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(248px,1fr))', gap: 16, marginTop: 40 }}>
-            {conditions.map((c) => (
-              <div key={c.en} className="card card-lift" style={{ padding: '22px 20px', display: 'flex', flexDirection: 'column', gap: 7 }}>
-                <span style={{ width: 38, height: 38, borderRadius: 10, background: '#E2F0ED', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 4 }}>
-                  <IconPlus size={20} stroke="#EC6A4E" strokeWidth={2.4} />
-                </span>
-                <h3 className="serif" style={{ fontWeight: 600, fontSize: '19.5px', color: '#16201D', lineHeight: 1.15 }}>{c.en}</h3>
-                <div style={{ fontSize: 15, color: '#C2553B', fontWeight: 600 }}>{c.hi}</div>
-                <p style={{ fontSize: 14, lineHeight: 1.5, color: '#5C6A64', marginTop: 3 }}>{c.desc}</p>
-              </div>
-            ))}
+            {conditions.map((c) => {
+              const slug = conditionSlugByEn[c.en];
+              const body = (
+                <>
+                  <span style={{ width: 38, height: 38, borderRadius: 10, background: '#E2F0ED', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 4 }}>
+                    <IconPlus size={20} stroke="#EC6A4E" strokeWidth={2.4} />
+                  </span>
+                  <h3 className="serif" style={{ fontWeight: 600, fontSize: '19.5px', color: '#16201D', lineHeight: 1.15 }}>{c.en}</h3>
+                  <div style={{ fontSize: 15, color: '#C2553B', fontWeight: 600 }}>{c.hi}</div>
+                  <p style={{ fontSize: 14, lineHeight: 1.5, color: '#5C6A64', marginTop: 3 }}>{c.desc}</p>
+                  {slug && (
+                    <span style={{ marginTop: 'auto', paddingTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, color: '#0C4A4D', fontWeight: 700, fontSize: 14 }}>
+                      Learn more <IconArrowRight size={14} strokeWidth={2.2} />
+                    </span>
+                  )}
+                </>
+              );
+              return slug ? (
+                <a key={c.en} href={`/treatments/${slug}/`} className="card card-lift" style={{ padding: '22px 20px', display: 'flex', flexDirection: 'column', gap: 7, textDecoration: 'none' }}>
+                  {body}
+                </a>
+              ) : (
+                <div key={c.en} className="card card-lift" style={{ padding: '22px 20px', display: 'flex', flexDirection: 'column', gap: 7 }}>
+                  {body}
+                </div>
+              );
+            })}
           </div>
           <div style={{ marginTop: 30, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 14, background: '#fff', border: '1px dashed #C8D8D4', borderRadius: 16, padding: '20px 24px' }}>
             <span style={{ fontSize: 16, color: '#3a443f', fontWeight: 500 }}>Don&rsquo;t see your problem listed? Dr. Ashish treats a wide range of surgical conditions.</span>
@@ -432,46 +449,7 @@ export default function Home() {
       </section>
 
       {/* ============ FOOTER ============ */}
-      <footer style={{ background: '#062E30', color: '#9FB8B2' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(40px,5vw,64px) 24px 0' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'space-between', paddingBottom: 36, borderBottom: '1px solid rgba(255,255,255,.08)' }}>
-            <div style={{ maxWidth: 320 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 14 }}>
-                <LogoBadge size={38} svg={21} />
-                <span className="serif" style={{ fontSize: 19, fontWeight: 600, color: '#fff' }}>Dr. Ashish Agarwal</span>
-              </div>
-              <p style={{ fontSize: '14.5px', lineHeight: 1.6, color: '#85A39C' }}>
-                Advanced Laparoscopic Surgeon &amp; Proctologist, Gorakhpur. Modern keyhole surgery for gallstones, hernia, piles, fistula &amp; more.
-              </p>
-            </div>
-            <div>
-              <div style={{ fontSize: '12.5px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#F4A88E', fontWeight: 700, marginBottom: 14 }}>Quick Links</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 15 }}>
-                <a href="#about" className="flink">About the Surgeon</a>
-                <a href="#treatments" className="flink">Treatments</a>
-                <a href="#keyhole" className="flink">Why Keyhole Surgery</a>
-                <a href="#ayushman" className="flink">Ayushman Bharat</a>
-                <a href="#contact" className="flink">Contact &amp; Location</a>
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '12.5px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#F4A88E', fontWeight: 700, marginBottom: 14 }}>Reach Us</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 15 }}>
-                <a href={TEL_MAIN} className="flink">+91 98075 60443</a>
-                <a href={TEL_ALT} className="flink">+91 79850 32860</a>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flink">WhatsApp Chat</a>
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="flink">Instagram {INSTAGRAM_HANDLE}</a>
-                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="flink">Facebook</a>
-                <span style={{ color: '#85A39C', lineHeight: 1.5 }}>Daudpur, Near Bela Public<br />School, Gorakhpur, UP</span>
-              </div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 18px', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0 30px', fontSize: 13, color: '#6f8b85' }}>
-            <span>© {year} Dr. Ashish Agarwal · drashishlaparoscopy.com · UP MCI Reg. 64333</span>
-            <span style={{ maxWidth: 560, lineHeight: 1.5 }}>Surgical outcomes vary by individual. Please consult the doctor for advice specific to your condition.</span>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* ============ STICKY MOBILE CALL BAR (<=960px) ============ */}
       <div className="callbar" style={{ position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 60, gap: 2, background: '#0C4A4D', boxShadow: '0 -6px 22px rgba(0,0,0,.22)' }}>
